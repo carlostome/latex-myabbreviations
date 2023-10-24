@@ -1,0 +1,43 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{myabbreviations}
+
+\newif\ifitalics
+
+\italicsfalse
+
+\DeclareOption{italics}{\italicstrue}
+
+\DeclareOption*{\PackageWarningNoLine{myabbreviations}{Unknown option: `\CurrentOption'}}
+
+\ProcessOptions\relax
+
+\RequirePackage{xspace} % \xspace
+
+\makeatletter
+\ifitalics
+  \newcommand\abbrv@format\textit
+\else
+  \newcommand\abbrv@format{}
+\fi
+\makeatother
+
+\makeatletter
+\NewDocumentCommand{\abbreviation}{m}{%
+  \@ifnextchar{.}%
+    {\abbrv@format{#1}}%
+    {\abbrv@format{#1}.\@\xspace}%
+}
+\makeatother
+\NewDocumentCommand{\DeclareAbbreviation}{mm}{%
+  \NewDocumentCommand{#1}{}{\abbreviation{#2}}%
+}
+
+\DeclareAbbreviation{\ca}{ca}
+\DeclareAbbreviation{\cf}{cf}
+\DeclareAbbreviation{\eg}{e.g}
+\DeclareAbbreviation{\etal}{et al}
+\DeclareAbbreviation{\etc}{etc}
+\DeclareAbbreviation{\ibid}{ibid}
+\DeclareAbbreviation{\ie}{i.e}
+\DeclareAbbreviation{\resp}{resp}
+\DeclareAbbreviation{\vs}{vs}

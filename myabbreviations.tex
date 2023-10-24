@@ -1,0 +1,49 @@
+\documentclass{article}
+
+\usepackage[italics]{myabbreviations}
+
+\begin{document}
+\title{\texttt{myabbreviations} Sample Document}
+\author{}
+\date{}
+
+\maketitle
+
+\begin{verbatim*}
+\usepackage[italics]{myabbreviations}
+\end{verbatim*}
+
+\section{Defining abbreviations}
+
+\begin{verbatim*}
+\DeclareAbbreviation\abc{abc}
+T \abc U \abc. V \abc, W (\abc) X [\abc] Y [\abc{}] Z
+\end{verbatim*}
+%
+\DeclareAbbreviation\abc{abc}
+T \abc U \abc. V \abc, W (\abc) X [\abc] Y [\abc{}] Z
+
+\section{Predefined abbreviations}
+
+\begin{verbatim*}
+\ca circa \ca. circa\\
+\cf confer \cf. confer\\
+\eg exempli gratia \eg. exempli gratia\\
+\etal et alii \etal. et alii\\
+\etc et cetera \etc. et cetera\\
+\ibid ibidem \ibid. ibidem\\
+\ie id est \ie. id est\\
+\resp respectively \resp. respectively\\
+\vs versus \vs. versus
+\end{verbatim*}
+%
+\ca circa \ca. circa \\
+\cf confer \cf. confer \\
+\eg exempli gratia \eg. exempli gratia \\
+\etal et alii \etal. et alii \\
+\etc et cetera \etc. et cetera \\
+\ibid ibidem \ibid. ibidem \\
+\ie id est \ie. id est \\
+\resp respectively \resp. respectively \\
+\vs versus \vs. versus
+\end{document}
