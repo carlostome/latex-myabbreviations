@@ -1,6 +1,7 @@
 \documentclass{article}
 
-\usepackage[italics]{myabbreviations}
+\usepackage[hyperref,italics]{myabbreviations}
+\usepackage{hyperref}
 
 \begin{document}
 \title{\texttt{myabbreviations} Sample Document}
@@ -10,7 +11,8 @@
 \maketitle
 
 \begin{verbatim*}
-\usepackage[italics]{myabbreviations}
+\usepackage[hyperref,italics]{myabbreviations}
+\usepackage{hyperref}
 \end{verbatim*}
 
 \section{Defining abbreviations}
@@ -46,4 +48,41 @@ T \abc U \abc. V \abc, W (\abc) X [\abc] Y [\abc{}] Z
 \ie id est \ie. id est \\
 \resp respectively \resp. respectively \\
 \vs versus \vs. versus
+
+\section{Abbreviations in PDF strings (option \texttt{hyperref})}
+
+When the package~\texttt{hyperref} is loaded then using the
+macro~\verb|\vs|, for instance, which is defined by
+\texttt{myabbreviations} using \verb|\DeclareAbbreviation{\vs}{vs}|,
+in a \verb|\section| command like
+%
+\begin{verbatim}
+\section{Classical \vs{} intuitionistic logic}
+\end{verbatim}
+%
+generates the following warning (and a faulty bookmark):
+%
+\begin{verbatim}
+Package hyperref Warning: Token not allowed in a PDF string (Unicode):
+(hyperref)                removing `\vs' on input line 8.
+\end{verbatim}
+
+One solution is to replace the macro by the corresponding string in
+that specific PDF string:
+%
+\begin{verbatim}
+\section{Classical \texorpdfstring{\vs}{vs.} intuitionistic logic}
+\end{verbatim}
+%
+This replacement can be achieved for all PDF strings:
+%
+\begin{verbatim}
+\pdfstringdefDisableCommands{\def\vs{vs.}}
+\section{Classical \vs{} intuitionistic logic}
+\end{verbatim}
+%
+The replacement of the macro~\verb|\vs| by the string~\texttt{vs.},
+for instance, using the macro~\verb|\pdfstringdefDisableCommands| is
+what the command~\verb|\DeclareAbbreviation{\vs}{vs}| does when the
+option~\texttt{hyperref} is specified.
 \end{document}

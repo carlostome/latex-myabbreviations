@@ -1,10 +1,13 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesPackage{myabbreviations}
 
+\newif\ifhyperref
 \newif\ifitalics
 
+\hyperreffalse
 \italicsfalse
 
+\DeclareOption{hyperref}{\hyperreftrue}
 \DeclareOption{italics}{\italicstrue}
 
 \DeclareOption*{\PackageWarningNoLine{myabbreviations}{Unknown option: `\CurrentOption'}}
@@ -30,6 +33,13 @@
 \makeatother
 \NewDocumentCommand{\DeclareAbbreviation}{mm}{%
   \NewDocumentCommand{#1}{}{\abbreviation{#2}}%
+  \ifhyperref
+    \AddToHook{begindocument/before}{%
+      \pdfstringdefDisableCommands{%
+        \def#1{#2.}%
+      }%
+    }%
+  \fi
 }
 
 \DeclareAbbreviation{\ca}{ca}
